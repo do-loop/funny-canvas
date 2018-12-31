@@ -70,15 +70,20 @@ class Canvas {
                 }
                 break;
             }
-            case ActionType.Up:
-            case ActionType.Out: {
-                this.drawer.stop();
-                this.lines = this.lines
-                    .filter(x => x.getPoints().length > 1);
+            case ActionType.Up: {
+                this._stop();
                 this._redraw();
+            }
+            case ActionType.Out: {
+                this._stop();
                 break;
             }
         }
+    }
+    _stop() {
+        this.drawer.stop();
+        this.lines = this.lines
+            .filter(x => x.getPoints().length > 1);
     }
     _createLine() {
         this.lines.push(new Line());
