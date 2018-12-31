@@ -13,6 +13,9 @@ class Drawer {
         this.context.fillStyle = color || Settings.CanvasColor;
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
+    clear() {
+        this.colorize();
+    }
     start() {
         this.context.beginPath();
     }
@@ -22,6 +25,12 @@ class Drawer {
         this.context.lineWidth = Settings.LineSize;
         this.context.strokeStyle = Settings.LineColor;
         this.context.stroke();
+    }
+    drawPoints(points) {
+        this.start();
+        for (let i = 0; i < points.length - 1; i++)
+            this.draw(points[i], points[i + 1]);
+        this.stop();
     }
     stop() {
         this.context.closePath();

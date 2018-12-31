@@ -57,17 +57,16 @@ class Canvas {
         switch (actionType) {
             case ActionType.Down: {
                 this.drawer.start();
-                this.lines.push(new Line());
+                this._createLine();
+                this._addPoint();
                 break;
             }
             case ActionType.Move: {
                 if (this.state.getIsDrawing()) {
-                    this.lines[this.lines.length - 1].addPoint(
-                        this.state.getCurrentPosition().getX(),
-                        this.state.getCurrentPosition().getY());
                     this.drawer.draw(
                         this.state.getPreviousPosition(),
                         this.state.getCurrentPosition());
+                    this._addPoint();
                 }
                 break;
             }
@@ -76,8 +75,22 @@ class Canvas {
                 this.drawer.stop();
                 this.lines = this.lines
                     .filter(x => x.getPoints().length > 1);
+                this._redraw();
                 break;
             }
         }
+    }
+    _createLine() {
+        this.lines.push(new Line());
+    }
+    _addPoint() {
+        this.lines[this.lines.length - 1].addPoint(
+            this.state.getCurrentPosition().getX(),
+            this.state.getCurrentPosition().getY())
+    }
+    _redraw() {
+        this.drawer.clear();
+        this.lines.forEach(x =>
+            this.drawer.drawPoints(x.getPoints()));
     }
 }
