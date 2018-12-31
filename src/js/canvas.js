@@ -3,14 +3,17 @@ class Canvas {
         this.lines = [];
         this.state = new State();
         this.drawer = drawer;
-        this.drawer.colorize();
         this.canvas = this.drawer.getCanvas();
         this._stretch();
+        this._colorize();
         this._initialize();
     }
     _stretch() {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
+    }
+    _colorize() {
+        this.drawer.colorize();
     }
     _initialize() {
         this.subscribers = [];
