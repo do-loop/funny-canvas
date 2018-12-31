@@ -1,12 +1,16 @@
 class Canvas {
     constructor(drawer) {
+        this.lines = [];
+        this.state = new State();
         this.drawer = drawer;
+        this.drawer.colorize();
         this.canvas = this.drawer.getCanvas();
+        this._stretch();
+        this._initialize();
+    }
+    _stretch() {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
-        this.drawer.setCanvasColor(Settings.CanvasColor);
-        this.state = new State();
-        this._initialize();
     }
     _initialize() {
         this.subscribers = [];
@@ -50,9 +54,18 @@ class Canvas {
         switch (actionType) {
             case ActionType.Down: {
                 this.drawer.start();
+                const line = new Line(
+                    this.state.getCurrentPosition().getX(),
+                    this.state.getCurrentPosition().getY());
+                this.lines.push(line);
             }
             case ActionType.Move: {
                 if (this.state.getIsDrawing()) {
+                    if (this.lines.length > 0) {
+                        this.lines[this.lines.length - 1].addPoint(
+                            this.state.getCurrentPosition().getX(),
+                            this.state.getCurrentPosition().getY());
+                    }
                     this.drawer.draw(
                         this.state.getPreviousPosition(),
                         this.state.getCurrentPosition());

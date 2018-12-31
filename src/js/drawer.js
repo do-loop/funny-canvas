@@ -9,8 +9,8 @@ class Drawer {
     getContext() {
         return this.context;
     }
-    setCanvasColor(color) {
-        this.context.fillStyle = color;
+    colorize(color) {
+        this.context.fillStyle = color || Settings.CanvasColor;
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
     start() {

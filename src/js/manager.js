@@ -9,7 +9,7 @@ class Manager {
         this._updateCurrentPosition(event);
         const state = this.canvas.getState();
         this._updatePreviousPosition();
-        state.setCurrentActionType(ActionType.Move);
+        state.setCurrentActionType(ActionType.Down);
         state.setIsDrawing(true);
         this.canvas.setState(state);
         this.canvas.update();

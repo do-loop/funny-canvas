@@ -1,12 +1,10 @@
 class Line {
-    constructor(width, color) {
-        this.width = width || Settings.LineSize;
-        this.color = color || Settings.LineColor;
+    constructor(x, y) {
+        this.points = [
+            new Position(x, y)
+        ];
     }
-    getWidth() {
-        return this.width;
-    }
-    getColor() {
-        return this.color;
+    addPoint(x, y) {
+        this.points.push(new Position(x, y));
     }
 }
