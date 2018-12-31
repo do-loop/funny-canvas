@@ -54,26 +54,26 @@ class Canvas {
         switch (actionType) {
             case ActionType.Down: {
                 this.drawer.start();
-                const line = new Line(
-                    this.state.getCurrentPosition().getX(),
-                    this.state.getCurrentPosition().getY());
-                this.lines.push(line);
+                this.lines.push(new Line());
+                break;
             }
             case ActionType.Move: {
                 if (this.state.getIsDrawing()) {
-                    if (this.lines.length > 0) {
-                        this.lines[this.lines.length - 1].addPoint(
-                            this.state.getCurrentPosition().getX(),
-                            this.state.getCurrentPosition().getY());
-                    }
+                    this.lines[this.lines.length - 1].addPoint(
+                        this.state.getCurrentPosition().getX(),
+                        this.state.getCurrentPosition().getY());
                     this.drawer.draw(
                         this.state.getPreviousPosition(),
                         this.state.getCurrentPosition());
                 }
+                break;
             }
             case ActionType.Up:
             case ActionType.Out: {
                 this.drawer.stop();
+                this.lines = this.lines
+                    .filter(x => x.getPoints().length > 1);
+                break;
             }
         }
     }

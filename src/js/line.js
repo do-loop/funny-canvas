@@ -1,10 +1,11 @@
 class Line {
-    constructor(x, y) {
-        this.points = [
-            new Position(x, y)
-        ];
+    constructor() {
+        this.points = [];
     }
     addPoint(x, y) {
         this.points.push(new Position(x, y));
+    }
+    getPoints() {
+        return this.points;
     }
 }
