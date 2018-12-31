@@ -4,6 +4,7 @@ class Canvas {
         this.canvas = this.drawer.getCanvas();
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
+        this.drawer.setCanvasColor(Settings.CanvasColor);
         this.state = new State();
         this._initialize();
     }
@@ -49,11 +50,6 @@ class Canvas {
         switch (actionType) {
             case ActionType.Down: {
                 this.drawer.start();
-                if (this.state.getIsDrawing()) {
-                    this.drawer.draw(
-                        this.state.getPreviousPosition(),
-                        this.state.getCurrentPosition());
-                }
             }
             case ActionType.Move: {
                 if (this.state.getIsDrawing()) {

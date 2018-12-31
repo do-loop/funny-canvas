@@ -9,6 +9,10 @@ class Drawer {
     getContext() {
         return this.context;
     }
+    setCanvasColor(color) {
+        this.context.fillStyle = color;
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    }
     start() {
         this.context.beginPath();
     }

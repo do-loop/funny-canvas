@@ -1,6 +1,8 @@
 const White = "white";
+const Black = "black";
 
 const Settings = {
-    LineSize    : 3,
-    LineColor   : White
+    LineSize    : 4,
+    LineColor   : White,
+    CanvasColor : Black
 };
