@@ -6,9 +6,10 @@ const ActionType = {
 };
 
 const Color = {
-    White     : "white",
-    Black     : "black",
-    Orange    : "orange",
-    Green     : "green",
-    Blue      : "blue"
+    White       : "white",
+    Black       : "black",
+    Orange      : "orange",
+    Green       : "green",
+    Blue        : "blue",
+    Red         : "red"
 }
