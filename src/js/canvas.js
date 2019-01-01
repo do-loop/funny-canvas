@@ -99,11 +99,14 @@ class Canvas {
     }
     _normalizeLines() {
         this.normalizedLines = this.lines
-            .map(x => this.transformer.normalizeLine(x));
+            .map(x => this.transformer.normalizeLine(x))
+            .filter(x => x.getPoints().length > 2);
+        this.bezierLines = this.normalizedLines
+            .map(x => this.transformer.convertLine(x));
     }
     _redraw() {
         this.drawer.clear();
-        this.lines.forEach(x =>
-            this.drawer.drawPoints(x.getPoints()));
+        this.bezierLines.forEach(x =>
+            this.drawer.drawBezierPoints(x.getPoints()));
     }
 }
