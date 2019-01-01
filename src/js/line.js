@@ -8,4 +8,8 @@ class Line {
     getPoints() {
         return this.points;
     }
+    setPoints(points) {
+        this.points = points;
+        return this;
+    }
 }

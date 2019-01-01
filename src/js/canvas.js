@@ -1,7 +1,10 @@
 class Canvas {
-    constructor(drawer) {
+    constructor(state, transformer, drawer) {
         this.lines = [];
-        this.state = new State();
+        this.normalizedLines = [];
+        this.bezierLines = [];
+        this.state = state;
+        this.transformer = transformer;
         this.drawer = drawer;
         this.canvas = this.drawer.getCanvas();
         this._stretch();
@@ -83,7 +86,8 @@ class Canvas {
     _stop() {
         this.drawer.stop();
         this.lines = this.lines
-            .filter(x => x.getPoints().length > 1);
+            .filter(x => x.getPoints().length > 2);
+        this._normalizeLines();
     }
     _createLine() {
         this.lines.push(new Line());
@@ -92,6 +96,10 @@ class Canvas {
         this.lines[this.lines.length - 1].addPoint(
             this.state.getCurrentPosition().getX(),
             this.state.getCurrentPosition().getY())
+    }
+    _normalizeLines() {
+        this.normalizedLines = this.lines
+            .map(x => this.transformer.normalizeLine(x));
     }
     _redraw() {
         this.drawer.clear();
