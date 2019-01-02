@@ -8,7 +8,6 @@ const manager       = new Manager(canvas);
 const watcher       = new Watcher(manager);
 
 const Points = [
-
     new Point(100, 180),
     new Point(130, 180),   
     new Point(160, 180),
