@@ -95,7 +95,7 @@ class Canvas {
     _addPoint() {
         this.lines[this.lines.length - 1].addPoint(
             this.state.getCurrentPosition().getX(),
-            this.state.getCurrentPosition().getY())
+            this.state.getCurrentPosition().getY());
     }
     _normalizeLines() {
         this.normalizedLines = this.lines
